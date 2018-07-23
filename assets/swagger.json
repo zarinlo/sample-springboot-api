@@ -1,0 +1,208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Sample Spring boot API",
+    "version": "1.0.0",
+    "title": "Stock API",
+    "contact": {
+      "name": "Zarin",
+      "url": "https://github.com/zarinlo"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "stock-controller",
+      "description": "Stock Controller"
+    }
+  ],
+  "paths": {
+    "/api/v1/stocks": {
+      "get": {
+        "tags": [
+          "stock-controller"
+        ],
+        "summary": "Get all stocks",
+        "operationId": "getStocksUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StocksResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "stock-controller"
+        ],
+        "summary": "Create a new stock",
+        "operationId": "createStockUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "newStock",
+            "description": "New stock object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Stock"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Stock"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/stocks/{symbol}": {
+      "get": {
+        "tags": [
+          "stock-controller"
+        ],
+        "summary": "Get a stock object by symbol",
+        "operationId": "getStockBySymbolUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "description": "A stock symbol",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Stock"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "stock-controller"
+        ],
+        "summary": "Update an existing stock by symbol",
+        "operationId": "updateStockBySymbolUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "description": "A stock symbol",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "updatedStock",
+            "description": "Updated stock object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Stock"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Stock"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "stock-controller"
+        ],
+        "summary": "Delete a stock by symbol",
+        "operationId": "deleteStockBySymbolUsingDELETE",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "description": "A stock symbol",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Stock": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      },
+      "title": "Stock"
+    },
+    "StocksResponse": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Stock"
+          }
+        }
+      },
+      "title": "StocksResponse"
+    }
+  }
+}
