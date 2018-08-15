@@ -1,0 +1,139 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Stock API
+  description: Spring boot API that maintains stocks in a MongoDB
+  contact:
+    name: Zarin
+    url: 'https://github.com/zarinlo'
+basePath: /api/v1
+host: 'localhost:8080'
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: stock
+    description: Stock Controller
+paths:
+  /stocks:
+    x-swagger-router-controller: stocks
+    get:
+      tags:
+        - stock
+      description: Get all stocks
+      operationId: getStocks
+      responses:
+        '200':
+          description: stocks found
+          schema:
+            $ref: '#/definitions/StocksResponse'
+    post:
+      tags:
+        - stock
+      description: Create a stock
+      operationId: createStock
+      parameters:
+        - name: stock
+          in: body
+          description: New stock object
+          required: true
+          schema:
+            $ref: '#/definitions/Stock'
+      responses:
+        '201':
+          description: stock created
+          schema:
+            $ref: '#/definitions/Stock'
+  '/stocks/{symbol}':
+    x-swagger-router-controller: stocks
+    get:
+      tags:
+        - stock
+      description: Get a stock object by stock symbol
+      operationId: getStockBySymbol
+      parameters:
+        - name: symbol
+          in: path
+          description: A stock symbol
+          required: true
+          type: string
+      responses:
+        '200':
+          description: stock found
+          schema:
+            $ref: '#/definitions/Stock'
+        '404':
+          description: Not found
+    put:
+      tags:
+        - stock
+      description: Update an existing stock object by stock symbol
+      operationId: updateStockBtSymbol
+      parameters:
+        - name: symbol
+          in: path
+          description: A stock symbol
+          required: true
+          type: string
+        - name: updatedStock
+          in: body
+          description: Updated stock object
+          required: true
+          schema:
+            $ref: '#/definitions/Stock'
+      responses:
+        '202':
+          description: stock updated
+          schema:
+            $ref: '#/definitions/Stock'
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - stock
+      description: Delete a stock object by stock symbol
+      operationId: deleteStockBySymbol
+      parameters:
+        - name: symbol
+          in: path
+          description: A stock symbol
+          required: true
+          type: string
+      responses:
+        '204':
+          description: stock deleted
+        '404':
+          description: Not found
+definitions:
+  Stock:
+    type: object
+    required:
+      - description
+      - lastUpdated
+      - name
+      - price
+      - symbol
+    properties:
+      description:
+        type: string
+      lastUpdated:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      symbol:
+        type: string
+  StocksResponse:
+    type: object
+    required:
+      - stocks
+    properties:
+      stocks:
+        type: array
+        items:
+          $ref: '#/definitions/Stock'

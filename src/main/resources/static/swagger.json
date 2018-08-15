@@ -1,59 +1,60 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Sample Spring boot API",
     "version": "1.0.0",
     "title": "Stock API",
+    "description": "Spring boot API that maintains stocks in a MongoDB",
     "contact": {
       "name": "Zarin",
       "url": "https://github.com/zarinlo"
     }
   },
+  "basePath": "/api/v1",
   "host": "localhost:8080",
-  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "tags": [
     {
-      "name": "stock-controller",
+      "name": "stock",
       "description": "Stock Controller"
     }
   ],
   "paths": {
-    "/api/v1/stocks": {
+    "/stocks": {
+      "x-swagger-router-controller": "stocks",
       "get": {
         "tags": [
-          "stock-controller"
+          "stock"
         ],
-        "summary": "Get all stocks",
-        "operationId": "getStocksUsingGET",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Get all stocks",
+        "operationId": "getStocks",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "stocks found",
             "schema": {
               "$ref": "#/definitions/StocksResponse"
             }
           }
-        },
-        "deprecated": false
+        }
       },
       "post": {
         "tags": [
-          "stock-controller"
+          "stock"
         ],
-        "summary": "Create a new stock",
-        "operationId": "createStockUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Create a stock",
+        "operationId": "createStock",
         "parameters": [
           {
+            "name": "stock",
             "in": "body",
-            "name": "newStock",
             "description": "New stock object",
             "required": true,
             "schema": {
@@ -63,25 +64,22 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "stock created",
             "schema": {
               "$ref": "#/definitions/Stock"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     },
-    "/api/v1/stocks/{symbol}": {
+    "/stocks/{symbol}": {
+      "x-swagger-router-controller": "stocks",
       "get": {
         "tags": [
-          "stock-controller"
+          "stock"
         ],
-        "summary": "Get a stock object by symbol",
-        "operationId": "getStockBySymbolUsingGET",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Get a stock object by stock symbol",
+        "operationId": "getStockBySymbol",
         "parameters": [
           {
             "name": "symbol",
@@ -93,26 +91,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "stock found",
             "schema": {
               "$ref": "#/definitions/Stock"
             }
+          },
+          "404": {
+            "description": "Not found"
           }
-        },
-        "deprecated": false
+        }
       },
       "put": {
         "tags": [
-          "stock-controller"
+          "stock"
         ],
-        "summary": "Update an existing stock by symbol",
-        "operationId": "updateStockBySymbolUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Update an existing stock object by stock symbol",
+        "operationId": "updateStockBtSymbol",
         "parameters": [
           {
             "name": "symbol",
@@ -122,8 +116,8 @@
             "type": "string"
           },
           {
-            "in": "body",
             "name": "updatedStock",
+            "in": "body",
             "description": "Updated stock object",
             "required": true,
             "schema": {
@@ -133,23 +127,22 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "stock updated",
             "schema": {
               "$ref": "#/definitions/Stock"
             }
+          },
+          "404": {
+            "description": "Not found"
           }
-        },
-        "deprecated": false
+        }
       },
       "delete": {
         "tags": [
-          "stock-controller"
+          "stock"
         ],
-        "summary": "Delete a stock by symbol",
-        "operationId": "deleteStockBySymbolUsingDELETE",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Delete a stock object by stock symbol",
+        "operationId": "deleteStockBySymbol",
         "parameters": [
           {
             "name": "symbol",
@@ -161,39 +154,48 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "stock deleted"
+          },
+          "404": {
+            "description": "Not found"
           }
-        },
-        "deprecated": false
+        }
       }
     }
   },
   "definitions": {
     "Stock": {
       "type": "object",
+      "required": [
+        "description",
+        "lastUpdated",
+        "name",
+        "price",
+        "symbol"
+      ],
       "properties": {
         "description": {
           "type": "string"
         },
         "lastUpdated": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "name": {
           "type": "string"
         },
         "price": {
-          "type": "number",
-          "format": "double"
+          "type": "integer"
         },
         "symbol": {
           "type": "string"
         }
-      },
-      "title": "Stock"
+      }
     },
     "StocksResponse": {
       "type": "object",
+      "required": [
+        "stocks"
+      ],
       "properties": {
         "stocks": {
           "type": "array",
@@ -201,8 +203,7 @@
             "$ref": "#/definitions/Stock"
           }
         }
-      },
-      "title": "StocksResponse"
+      }
     }
   }
 }
