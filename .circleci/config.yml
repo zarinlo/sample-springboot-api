@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # https://circleci.com/docs/2.0/circleci-images/#openjdk
+      - image: circleci/openjdk:11.0.1-jdk
+
+    working_directory: ~/testing
+    
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Decrpyt Secrets
+          command: openssl enc -d -aes-256-ecb -md md5 -in src/main/resources/application-prod.properties.secrets -out src/main/resources/application-prod.properties -k $SECRETS_KEY
+            
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - testing-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: testing-{{ checksum "pom.xml" }}
+        
+      # run tests!
+      - run: mvn clean compile jib:build -Dimage=zarinlo/springboot-api:$CIRCLE_BUILD_NUM
+
+      - store_artifacts:
+          path: target/sample-api-$CIRCLE_BUILD_NUM.jar

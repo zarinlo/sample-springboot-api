@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.10</java.version>
+        <java.version>1.11</java.version>
     </properties>
 
     <dependencies>
@@ -84,9 +84,29 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
-                    <source>1.10</source>
-                    <target>1.10</target>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>0.10.1</version>
+                <configuration>
+                    <from>
+                        <image>openjdk:11-jdk-slim</image>
+                    </from>
+                    <to>
+                        <image>registry.hub.docker.com/zarinlo/sample-api:${version}</image>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                            <port>15370</port>
+                        </ports>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>

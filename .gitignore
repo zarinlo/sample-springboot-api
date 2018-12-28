@@ -272,5 +272,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Ignore Secrets
+src/main/resources/application-prod.properties
 
 # End of https://www.gitignore.io/api/java,code,macos,maven,eclipse,windows,java-web,intellij,sublimetext
