@@ -1,5 +1,5 @@
 # Software Required
-- [Java8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or [Java10 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html)
+- [Java8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or [Java10 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html) (this project was built with jdk10)
 - [Apache Maven](https://maven.apache.org/download.cgi)
 - [MongoDB](https://www.mongodb.com/download-center#community)
 
