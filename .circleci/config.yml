@@ -5,10 +5,13 @@ jobs:
       # https://circleci.com/docs/2.0/circleci-images/#openjdk
       - image: circleci/openjdk:11.0.1-jdk
 
-    working_directory: ~/testing
+    working_directory: ~/sample-springboot-api
     
     steps:
+      # git pull
       - checkout
+
+      # setup testing env
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -21,17 +24,22 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - testing-{{ checksum "pom.xml" }}
+          - sample-springboot-api-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: testing-{{ checksum "pom.xml" }}
+          key: sample-springboot-api-{{ checksum "pom.xml" }}
         
-      # run tests!
+      # package into a jar
+      - run: mvn clean package
+
+      # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Dimage=zarinlo/springboot-api:$CIRCLE_BUILD_NUM
 
+      # store raw contents of src code
       - store_artifacts:
-          path: target/sample-api-$CIRCLE_BUILD_NUM.jar
+          path: target/classes
+          destination: sample-springboot-api
