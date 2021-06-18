@@ -1,0 +1,21 @@
+#set spring profile
+spring:
+  profiles:
+    active: prod
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+#actuators
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health, metrics, httptrace, mappings
+
+#stocks api
+stocks:
+  api:
+    fqdn: https://latest-stock-price.p.rapidapi.com

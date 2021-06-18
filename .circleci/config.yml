@@ -19,7 +19,7 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Decrpyt Secrets
-          command: openssl enc -d -aes-256-ecb -md md5 -in src/main/resources/application-prod.properties.secrets -out src/main/resources/application-prod.properties -k $SECRETS_KEY
+          command: openssl enc -d -aes-256-ecb -md md5 -in src/main/resources/application-prod.yaml.secrets -out src/main/resources/application-prod.yaml -k $SECRETS_KEY
             
       # Download and cache dependencies
       - restore_cache:

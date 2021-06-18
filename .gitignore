@@ -273,6 +273,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # Ignore Secrets
-src/main/resources/application-prod.properties
+src/main/resources/application-prod.yaml
 
 # End of https://www.gitignore.io/api/java,code,macos,maven,eclipse,windows,java-web,intellij,sublimetext
