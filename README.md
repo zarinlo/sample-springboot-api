@@ -4,8 +4,8 @@
 # Sample Spring Boot API using Remote MongoDB Atlas
 - [Quick Intro](#quick-intro)
 - [Software](#software)
-- [Startup Backend via IDE](#startup-backend-via-ide)
-- [Startup Backend via Command Line](#startup-backend-via-command-line)
+- [Run API via IDE](#run-api-via-ide)
+- [Run API via Command Line](#run-api-via-command-line)
     * [Windows](#windows)
     * [MacOS](#macos)
 - [Swagger](#swagger)
@@ -39,15 +39,15 @@ use the embedded version via a Maven Dependency. To do so, please uncomment the 
 
 # Software
 - Required - [OpenJDK: 16.0.1](https://www.oracle.com/java/technologies/javase-downloads.html)
-    * MacOS: [How to setup openjdk via Homebrew](How to setup openhttps://johnathangilday.com/blog/macos-homebrew-openjdk/)
-    * If you are using an openjdk version (min 11+), you can still run this project as long as you set the VM options 
+    * MacOS: [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/)
+    * If you are using an older version of openjdk (mininum 11+), you can still run this project as long as you set the VM options 
     in the Run Configuration to include: `-Djdk.tls.client.protocols=TLSv1.2`
 - Required - [Apache Maven: 3.5.3](https://maven.apache.org/download.cgi)
     * MacOS: [Install maven via Homebrew](https://formulae.brew.sh/formula/maven)
 - Optional - [MongoDB: 4.2](https://www.mongodb.com/download-center#community)
     * MacOS: [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
 
-# Startup Backend via IDE
+# Run API via IDE
 
 - [Setup local JDK under Project Settings and Structure in IntelliJ](https://www.jetbrains.com/help/idea/project-settings-and-structure.html)
 - [Create Springboot Run Debug Configuration in IntelliJ](https://www.jetbrains.com/help/idea/run-debug-configuration.html) 
@@ -55,7 +55,7 @@ use the embedded version via a Maven Dependency. To do so, please uncomment the 
     `application-local.yaml` on startup.
 - After you have your environment setup, run the application via the play button in the IDE: [How to run the Springboot App in IntelliJ](https://www.jetbrains.com/help/idea/running-applications.html)
 
-# Startup Backend via Command Line
+# Run API via Command Line
 
 - If you don't want to run the application from the IDE, then you can run it from a unix emulator (i.e. Git Bash, Cmder) or Terminal (MacOS).
 - Run the following bash commands in the root directory of this project.
