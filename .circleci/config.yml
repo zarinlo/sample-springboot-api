@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # https://circleci.com/docs/2.0/circleci-images/#openjdk
-      - image: circleci/openjdk:16.0.1-jdk
+      - image: circleci/openjdk:16.0.1-jdk-buster
 
     working_directory: ~/sample-springboot-api
     
