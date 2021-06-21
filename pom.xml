@@ -5,11 +5,11 @@
 
     <groupId>sample</groupId>
     <artifactId>api</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>api</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Sample Java Spring Boot API using MongoDB Atlas</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,26 +21,34 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.11</java.version>
+        <java.version>16</java.version>
+        <mongodb.version>4.1.1</mongodb.version>
         <jackson.version>2.12.0</jackson.version>
         <eclipse.collections>10.2.0</eclipse.collections>
-        <io.springfox.version>2.9.2</io.springfox.version>
+        <io.springfox.version>3.0.0</io.springfox.version>
         <unirest.version>1.4.9</unirest.version>
         <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
-        <!--Spring-->
+        <!--Spring MongoDB JPA-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        <!--        Embedded MongoDB-->
-        <!--        <dependency>-->
-        <!--            <groupId>de.flapdoodle.embed</groupId>-->
-        <!--            <artifactId>de.flapdoodle.embed.mongo</artifactId>-->
-        <!--            <version>3.0.0</version>-->
-        <!--        </dependency>-->
+        <!--Connect to MongoDB Atlas-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
+        <!--Embedded MongoDB-->
+<!--        <dependency>-->
+<!--            <groupId>de.flapdoodle.embed</groupId>-->
+<!--            <artifactId>de.flapdoodle.embed.mongo</artifactId>-->
+<!--            <version>3.0.0</version>-->
+<!--        </dependency>-->
+        <!--Spring-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -54,15 +62,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${io.springfox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
             <version>${io.springfox.version}</version>
         </dependency>
         <!--Rest Handler-->
@@ -70,11 +77,6 @@
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>${unirest.version}</version>
-        </dependency>
-        <!--Spring Actuators-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--Eclipse Collections-->
         <dependency>
@@ -128,19 +130,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>0.10.1</version>
+                <version>3.0.0</version>
                 <configuration>
                     <from>
-                        <image>openjdk:11-jdk-slim</image>
+                        <image>openjdk:16-jdk-slim</image>
                     </from>
                     <to>
                         <image>registry.hub.docker.com/zarinlo/sample-api:${project.version}</image>

@@ -1,4 +1,4 @@
-#set spring profile
+# spring related settings
 spring:
   profiles:
     active: prod
@@ -7,15 +7,15 @@ spring:
       write-dates-as-timestamps: false
     default-property-inclusion: non_null
 
-#actuators
+# actuators
 management:
   endpoints:
     web:
       base-path: /
       exposure:
-        include: health, metrics, httptrace, mappings
+        include: health, metrics, mappings
 
-#stocks api
+# stocks api
 stocks:
   api:
     fqdn: https://latest-stock-price.p.rapidapi.com

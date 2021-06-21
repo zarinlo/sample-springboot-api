@@ -11,10 +11,8 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
 
     @Bean
@@ -33,9 +31,9 @@ public class SwaggerConfig {
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
                 .title("Stock API")
-                .description("Sample Spring boot API")
-                .version("1.0.0")
-                .contact(new Contact("Zarin", "https://github.com/zarinlo", ""))
+                .description("Sample Java Spring Boot API using MongoDB Atlas")
+                .version("2.0.0")
+                .contact(new Contact("Zarin Lokhandwala", "https://github.com/zarinlo", ""))
                 .build();
     }
 }
