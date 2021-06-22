@@ -3,6 +3,7 @@
 
 # Sample Spring Boot API using Remote MongoDB Atlas
 - [Quick Intro](#quick-intro)
+- [Guides](#guides)
 - [Software](#software)
 - [Run API via IDE](#run-api-via-ide)
 - [Run API via Command Line](#run-api-via-command-line)
@@ -13,11 +14,15 @@
 
 # Quick Intro
 
-- This sample Java Springboot API will show how the following components function together: 
-    * Controller (manages all the REST calls and status codes)
-    * Service (business logic layer that handles any manipulation of data required)
-    * Repository (technically a JPA that allows one to query the database utilized by the Service)
-- The database (i.e. MongoDB Atlas cluster) is populated once the API is initialized with data sourced via the "Latest Stock API": https://rapidapi.com/suneetk92/api/latest-stock-price/
+This sample Java Spring Boot API will show how the following components function together: 
+
+| Components | Usage |
+| --- | --- |
+| Controller | Manages all the REST calls and status codes |
+| Service | Business logic layer that handles any manipulation of data required |
+| Repository | Using a Java Persistence API (JPA) that analyzes all the methods defined by an interface and automatically generates queries from the method names, we will connect to a MongoDB cluster used by the Service |
+    
+- The database (i.e. MongoDB Atlas cluster) is populated once the backend is initialized with data provided by the "Latest Stock API": https://rapidapi.com/suneetk92/api/latest-stock-price/
 - The sample API key used to obtain sample data for this demo is: `9e87a2c143msh6b92309e36af212p15ccc6jsn2bc37ea481bd`
 - The code snippet that populates the database and refreshes the data once a minute is: 
 ```java
@@ -25,27 +30,18 @@
 public void populateStockDatabase() throws StocksResponseException { ... }
 ``` 
 
-- In order to populate the database, you can either run MongoDB locally or
-use the embedded version via a Maven Dependency. To do so, please uncomment the following in the root 
-`pom.xml` (you will see `Jackson Databind` errors, don't worry):
+# Guides
 
-```java
-<dependency>
-    <groupId>de.flapdoodle.embed</groupId>
-    <artifactId>de.flapdoodle.embed.mongo</artifactId>
-    <version>3.0.0</version>
-</dependency>
-``` 
+- [Codelab style guide on how to design and develop this Spring Boot app](https://zarin.io/codelabs/springboot-api/#0)
+- [How to setup a CircleCI pipeline for this containerized Spring Boot app connected to MongoDB Atlas](https://faun.pub/setup-a-circleci-pipeline-for-a-containerized-spring-boot-app-93045fa060de)
 
 # Software
-- Required - [OpenJDK: 16.0.1](https://www.oracle.com/java/technologies/javase-downloads.html)
-    * MacOS: [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/)
-    * If you are using an older version of openjdk (mininum 11+), you can still run this project as long as you set the VM options 
-    in the Run Configuration to include: `-Djdk.tls.client.protocols=TLSv1.2`
-- Required - [Apache Maven: 3.5.3](https://maven.apache.org/download.cgi)
-    * MacOS: [Install maven via Homebrew](https://formulae.brew.sh/formula/maven)
-- Optional - [MongoDB: 4.2](https://www.mongodb.com/download-center#community)
-    * MacOS: [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
+
+| Software | Version | Required | MacOS Guide | Notes
+| --- | --- | --- | --- | --- |
+| [OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html) | 16.0.1 | true | [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/) | If you are using an older version of openjdk (mininum 11+), you can still run this project as long as you set the VM options in the Run Configuration to include: `-Djdk.tls.client.protocols=TLSv1.2`
+| [Apache Maven](https://maven.apache.org/download.cgi) | 3.5.3 | true | [Install maven via Homebrew](https://formulae.brew.sh/formula/maven) | [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/) 
+| [MongoDB](https://www.mongodb.com/download-center#community) | 4.2 | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB by uncommenting the maven dependency in the root `pom.xml` under `<!--Embedded MongoDB-->`. You will see `Jackson Databind` errors, don't worry.
 
 # Run API via IDE
 
