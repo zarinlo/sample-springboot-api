@@ -1,4 +1,4 @@
-package sample.api.stocks.config;
+package sample.api.stocks.configs;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
