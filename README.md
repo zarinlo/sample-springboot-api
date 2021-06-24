@@ -6,11 +6,11 @@
 - [Guides](#guides)
 - [Software](#software)
 - [Codebase](#codebase)
-- [Database](#database)
-    * [Setup MongoDB](#setup-mongodb)
-        * [Option 1 - Run Embedded MongoDB](#option-1---run-embedded-mongodb)
-        * [Option 2 - Setup and Connect to Remote MongoDB](#option-2---setup-and-connect-to-remote-mongodb)
-    * [Populate MongoDB](#populate-mongodb)
+- [Setup and Connect to the Database](#setup-and-connect-to-the-database)
+    * [Option 1 - Run Embedded MongoDB](#option-1---run-embedded-mongodb)
+    * [Option 2 - Setup and Run Local MongoDB](#option-2---setup-and-run-local-mongodb)
+    * [Option 3 - Setup and Connect to Remote MongoDB](#option-3---setup-and-connect-to-remote-mongodb)
+- [How the Database Populates](#how-the-database-populates)
 - [Run API via IDE](#run-api-via-ide)
 - [Run API via Command Line](#run-api-via-command-line)
     * [Windows](#windows)
@@ -38,7 +38,7 @@ This sample project aims to teach you:
 | --- | --- | --- | --- | --- |
 | [OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html) | 16.0.1 | true | [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/) | If you are using an older version of openjdk (minimum v11+), you can still run this project by either setting **VM options** in the Run Config or appending the following to the bash command below: `-Djdk.tls.client.protocols=TLSv1.2`
 | [Apache Maven](https://maven.apache.org/download.cgi) | 3.5.3 | true | [Install maven via Homebrew](https://formulae.brew.sh/formula/maven) | [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/) 
-| [MongoDB](https://www.mongodb.com/download-center#community) | 4.2 | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info below under **Codebase** section.
+| [MongoDB](https://www.mongodb.com/download-center#community) | 4.2 | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info under the database related sections.
 
 # Codebase
 
@@ -49,37 +49,43 @@ and automatically generates queries from the method names, in order to simplify 
 - **Configs**: Sets up the configurations for the REST calls, web security, Swagger documentation, etc
 - **Models**: Defines the structure of all the data objects 
 
-# Database
+# Setup and Connect to the Database
 
-### Setup MongoDB
+### Option 1 - Run Embedded MongoDB
 
-#### Option 1 - Run Embedded MongoDB
+- Uncomment the maven dependency under `<!--Embedded MongoDB-->` in the root `pom.xml`:
+    
+    ```java
+    <dependency>
+        <groupId>de.flapdoodle.embed</groupId>
+        <artifactId>de.flapdoodle.embed.mongo</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    ```
 
-- Uncomment the maven dependency in the root `pom.xml` under `<!--Embedded MongoDB-->`
 - You will see `Jackson Databind` errors, don't worry
-- This will startup an embedded instance of MongoDB and you will not need to install 
-MongoDB or create a remote MongoDB cluster for testing purposes
-```java
-<dependency>
-    <groupId>de.flapdoodle.embed</groupId>
-    <artifactId>de.flapdoodle.embed.mongo</artifactId>
-    <version>3.0.0</version>
-</dependency>
-```
+- This will startup an embedded instance of MongoDB, therefore you don't need Options 2 oe 3 
 
-#### Option 2 - Setup and Connect to Remote MongoDB
+### Option 2 - Setup and Run Local MongoDB
 
-- [How to setup a CircleCI pipeline for a containerized version of this Spring Boot API connected to MongoDB Atlas](https://faun.pub/setup-a-circleci-pipeline-for-a-containerized-spring-boot-app-93045fa060de)
+- MacOS Guide: [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
+- Windows Guide: [Install mongodb 4.x.x via MSI package](https://www.simplilearn.com/tutorials/mongodb-tutorial/install-mongodb-on-windows)
 
-### Populate MongoDB
+### Option 3 - Setup and Connect to Remote MongoDB
 
-- The database (i.e. MongoDB Atlas cluster) is populated once the backend is initialized with data provided by the **Latest Stock API**: https://rapidapi.com/suneetk92/api/latest-stock-price/
-- The `RestTemplateConfig.java` makes the connection to the API 
-- The code snippet that populates the database and refreshes the data once every minute is found in `StockServiceImpl.java` as: 
-```java
-@Scheduled(fixedRate = 60000)
-public void populateStockDatabase() throws StocksResponseException { ... }
-``` 
+- [Read the section on how to setup and connect to MongoDB Atlas](https://faun.pub/setup-a-circleci-pipeline-for-a-containerized-spring-boot-app-93045fa060de)
+
+# How the Database Populates
+
+- The database (i.e. MongoDB Atlas cluster) is populated once you initialize the backend.
+- The API used to populate the database is the **Latest Stock API**: https://rapidapi.com/suneetk92/api/latest-stock-price/
+- The `RestTemplateConfig.java` makes the connection to the API.
+- The code snippet that populates the database and refreshes the data once every minute is in `StockServiceImpl.java` as: 
+
+    ```java
+    @Scheduled(fixedRate = 60000)
+    public void populateStockDatabase() throws StocksResponseException { ... }
+    ``` 
 
 # Run API via IDE
 
