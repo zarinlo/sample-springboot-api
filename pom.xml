@@ -8,7 +8,7 @@
     <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>api</name>
+    <name>Stocks API</name>
     <description>Sample Java Spring Boot API using MongoDB Atlas</description>
 
     <parent>
@@ -26,7 +26,6 @@
         <jackson.version>2.12.0</jackson.version>
         <eclipse.collections>10.2.0</eclipse.collections>
         <io.springfox.version>3.0.0</io.springfox.version>
-        <unirest.version>1.4.9</unirest.version>
         <junit.version>4.13.1</junit.version>
     </properties>
 
@@ -72,12 +71,6 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>${io.springfox.version}</version>
         </dependency>
-        <!--Rest Handler-->
-        <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>${unirest.version}</version>
-        </dependency>
         <!--Eclipse Collections-->
         <dependency>
             <groupId>org.eclipse.collections</groupId>
@@ -89,7 +82,7 @@
             <artifactId>eclipse-collections</artifactId>
             <version>${eclipse.collections}</version>
         </dependency>
-        <!--Jackson Object Mapping-->
+        <!--Jackson Datatypes-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -132,8 +125,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>14</source>
+                    <target>14</target>
                 </configuration>
             </plugin>
             <plugin>

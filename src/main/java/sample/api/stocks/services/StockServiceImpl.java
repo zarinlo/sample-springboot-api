@@ -33,9 +33,7 @@ public class StockServiceImpl implements StockService {
         this.stockRepository = stockRepository;
 
         httpHeaders = new HttpHeaders();
-        httpHeaders.add("Content-Type", "application/json");
         httpHeaders.add("x-rapidapi-key", "9e87a2c143msh6b92309e36af212p15ccc6jsn2bc37ea481bd");
-        httpHeaders.add("x-rapidapi-host", "latest-stock-price.p.rapidapi.com");
     }
 
     //---------------------------------------------------------------------------------------------------------------

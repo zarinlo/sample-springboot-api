@@ -55,7 +55,7 @@ and automatically generates queries from the method names, in order to simplify 
 
 - Uncomment the maven dependency under `<!--Embedded MongoDB-->` in the root `pom.xml`:
     
-    ```java
+    ```xml
     <dependency>
         <groupId>de.flapdoodle.embed</groupId>
         <artifactId>de.flapdoodle.embed.mongo</artifactId>
@@ -64,7 +64,7 @@ and automatically generates queries from the method names, in order to simplify 
     ```
 
 - You will see `Jackson Databind` errors, don't worry
-- This will startup an embedded instance of MongoDB, therefore you don't need Options 2 oe 3 
+- This will startup an embedded instance of MongoDB, therefore you don't need Options 2 or 3 
 
 ### Option 2 - Setup and Run Local MongoDB
 

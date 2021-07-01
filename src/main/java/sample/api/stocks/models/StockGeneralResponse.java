@@ -1,11 +1,9 @@
 package sample.api.stocks.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.springframework.http.HttpStatus;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StockGeneralResponse<T> {
 
     @JsonProperty("response")
