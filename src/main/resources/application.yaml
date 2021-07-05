@@ -3,8 +3,6 @@ spring:
   profiles:
     active: prod
   jackson:
-    serialization:
-      write-dates-as-timestamps: false
     default-property-inclusion: non_null
 
 # actuators

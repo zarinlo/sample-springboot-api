@@ -23,7 +23,7 @@ public class StockServiceImpl implements StockService {
 
     private final RestTemplate stocksApiRestTemplate;
 
-    private HttpHeaders httpHeaders;
+    private final HttpHeaders httpHeaders;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceImpl.class);
 
