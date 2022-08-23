@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
-        <mongodb.version>4.1.1</mongodb.version>
+        <mongodb.version>4.1.2</mongodb.version>
         <jackson.version>2.13.3</jackson.version>
         <eclipse.collections>10.2.0</eclipse.collections>
         <springdoc.version>1.6.11</springdoc.version>
