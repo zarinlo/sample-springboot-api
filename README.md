@@ -35,10 +35,10 @@ This sample project aims to teach you:
 # Software
 
 | Software | Version | Required | MacOS Guide | Notes
-| --- | --- | --- | --- | --- |
-| [OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html) | 16.0.1 | true | [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/) | If you are using an older version of openjdk (minimum v11+), you can still run this project by either setting **VM options** in the Run Config or appending the following to the bash command below: `-Djdk.tls.client.protocols=TLSv1.2`
-| [Apache Maven](https://maven.apache.org/download.cgi) | 3.5.3 | true | [Install maven via Homebrew](https://formulae.brew.sh/formula/maven) | [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/) 
-| [MongoDB](https://www.mongodb.com/download-center#community) | 4.2 | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info under the database related sections.
+| --- |---------| --- | --- | --- |
+| [OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html) | 17.0.4  | true | [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/) | If you are using an older version of openjdk (minimum v11+), you can still run this project by either setting **VM options** in the Run Config or appending the following to the bash command below: `-Djdk.tls.client.protocols=TLSv1.2`
+| [Apache Maven](https://maven.apache.org/download.cgi) | 3.8.6   | true | [Install maven via Homebrew](https://formulae.brew.sh/formula/maven) | [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/) 
+| [MongoDB](https://www.mongodb.com/download-center#community) | 6.0     | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info under the database related sections.
 
 # Codebase
 
@@ -68,8 +68,8 @@ and automatically generates queries from the method names, in order to simplify 
 
 ### Option 2 - Setup and Run Local MongoDB
 
-- MacOS Guide: [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
-- Windows Guide: [Install mongodb 4.x.x via MSI package](https://www.simplilearn.com/tutorials/mongodb-tutorial/install-mongodb-on-windows)
+- MacOS Guide: [Install mongodb-community via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
+- Windows Guide: [Install mongodb via MSI package](https://www.simplilearn.com/tutorials/mongodb-tutorial/install-mongodb-on-windows)
 
 ### Option 3 - Setup and Connect to Remote MongoDB
 
@@ -86,6 +86,19 @@ and automatically generates queries from the method names, in order to simplify 
     @Scheduled(fixedRate = 60000)
     public void populateStockDatabase() throws StocksResponseException { ... }
     ``` 
+
+# Proxy Config 
+If you are running application and need to get around a proxy, then you must configure this project to use your system proxy.
+In the `ApiApplication.java` class, add the proper host and port in the `main` function.
+
+```java
+public static void main(String[] args) {
+    Properties props = System.getProperties();
+    props.put("https.proxyHost", "your-https-proxy-host");
+    props.put("https.proxyPort", "your-https-proxy-port");
+    SpringApplication.run(ApiApplication.class, args);
+}
+```
 
 # Run API via IDE
 
