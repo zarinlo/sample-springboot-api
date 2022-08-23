@@ -38,7 +38,7 @@ This sample project aims to teach you:
 | --- |---------| --- | --- | --- |
 | [OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html) | 17.0.4  | true | [How to setup openjdk via Homebrew](https://johnathangilday.com/blog/macos-homebrew-openjdk/) | If you are using an older version of openjdk (minimum v11+), you can still run this project by either setting **VM options** in the Run Config or appending the following to the bash command below: `-Djdk.tls.client.protocols=TLSv1.2`
 | [Apache Maven](https://maven.apache.org/download.cgi) | 3.8.6   | true | [Install maven via Homebrew](https://formulae.brew.sh/formula/maven) | [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/) 
-| [MongoDB](https://www.mongodb.com/download-center#community) | 6.0     | false | [Install mongodb-community@4.2 via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info under the database related sections.
+| [MongoDB](https://www.mongodb.com/download-center#community) | 6.0     | false | [Install mongodb-community via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x) | Use an embedded version of MongoDB. More info under the database related sections.
 
 # Codebase
 
