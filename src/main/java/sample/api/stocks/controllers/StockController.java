@@ -1,6 +1,9 @@
 package sample.api.stocks.controllers;
 
-import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sample.api.stocks.exceptions.StocksResponseException;
@@ -18,11 +21,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
         consumes = {APPLICATION_JSON_VALUE, APPLICATION_FORM_URLENCODED_VALUE, ALL_VALUE},
         produces = {APPLICATION_JSON_VALUE})
 @ApiResponses({
-        @ApiResponse(code = 200, message = "Successful: Stock(s) found."),
-        @ApiResponse(code = 400, message = "Bad Request: Check input parameter(s) syntax for invalid characters."),
-        @ApiResponse(code = 401, message = "Unauthorized: User is not entitled to retrieve information."),
-        @ApiResponse(code = 404, message = "Not Found: Stock(s) not found."),
-        @ApiResponse(code = 500, message = "Internal Server Error: Backend service is down.")
+        @ApiResponse(responseCode = "200", description = "Successful: Stock(s) found."),
+        @ApiResponse(responseCode = "400", description = "Bad Request: Check input parameter(s) syntax for invalid characters."),
+        @ApiResponse(responseCode = "401", description = "Unauthorized: User is not entitled to retrieve information."),
+        @ApiResponse(responseCode = "404", description = "Not Found: Stock(s) not found."),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error: Backend service is down.")
 })
 public class StockController {
 
@@ -34,7 +37,7 @@ public class StockController {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    @ApiOperation(value = "Get all stocks")
+    @Operation(summary = "Get all stocks")
     @GetMapping(value = "/stocks")
     public ResponseEntity<StockGeneralResponse> getAllStocks() {
 
@@ -46,14 +49,14 @@ public class StockController {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    @ApiOperation(value = "Get a stock by symbol")
+    @Operation(summary = "Get a stock by symbol")
     @GetMapping(value = "/stocks/{symbol}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="symbol", allowableValues = "SIEMENS, INDUSTOWER, NIFTY NEXT 50")
-    })
+    //    @Parameters({
+    //            @Parameter(name="symbol", allowableValues = "SIEMENS, INDUSTOWER, NIFTY NEXT 50")
+    //    })
     public ResponseEntity<StockGeneralResponse> getStockBySymbol(
-            @ApiParam(value = "A stock symbol", required = true)
-            @PathVariable String symbol) {
+            @Parameter(description = "A stock symbol", required = true)
+            @PathVariable() String symbol) {
 
         ResponseEntity<StockGeneralResponse> responseEntity;
         StockGeneralResponse serviceResponse = stockService.getStockBySymbol(symbol);
@@ -63,11 +66,11 @@ public class StockController {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    @ApiOperation(value = "Create a new stock")
+    @Operation(summary = "Create a new stock")
     @PostMapping(value = "/stocks")
     public ResponseEntity<StockGeneralResponse> createStock(
-            @ApiParam(value = "New stock object", required = true)
-            @RequestBody Stock stock) {
+            @Parameter(description = "New stock object", required = true)
+            @RequestBody() Stock stock) {
 
         ResponseEntity<StockGeneralResponse> responseEntity;
         StockGeneralResponse serviceResponse = stockService.createStock(stock);
@@ -77,13 +80,13 @@ public class StockController {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    @ApiOperation(value = "Update an existing stock by symbol")
+    @Operation(summary = "Update an existing stock by symbol")
     @PutMapping(value = "/stocks/{symbol}")
     public ResponseEntity<StockGeneralResponse> updateStockBySymbol(
-            @ApiParam(value = "A stock symbol", required = true)
-            @PathVariable String symbol,
-            @ApiParam(value = "Last Price", required = true, example = "127.05")
-            @RequestParam Double lastPrice) throws StocksResponseException {
+            @Parameter(description = "A stock symbol", required = true)
+            @PathVariable() String symbol,
+            @Parameter(description = "Last Price", required = true)
+            @RequestParam() Double lastPrice) throws StocksResponseException {
 
         ResponseEntity<StockGeneralResponse> responseEntity;
         StockGeneralResponse serviceResponse = stockService.updateStock(symbol, lastPrice);
@@ -93,11 +96,11 @@ public class StockController {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    @ApiOperation(value = "Delete a stock by symbol")
+    @Operation(summary = "Delete a stock by symbol")
     @DeleteMapping(value = "/stocks/{symbol}")
     public ResponseEntity<StockGeneralResponse> deleteStockBySymbol(
-            @ApiParam(value = "A stock symbol", required = true)
-            @PathVariable String symbol) {
+            @Parameter(description = "A stock symbol", required = true)
+            @PathVariable() String symbol) {
 
         ResponseEntity<StockGeneralResponse> responseEntity;
         StockGeneralResponse serviceResponse = stockService.deleteStock(symbol);
