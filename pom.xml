@@ -5,7 +5,7 @@
 
     <groupId>sample</groupId>
     <artifactId>api</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <packaging>jar</packaging>
 
     <name>Stocks API</name>
@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.0</version>
+        <version>2.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -41,12 +41,6 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>${mongodb.version}</version>
         </dependency>
-        <!--Embedded MongoDB-->
-<!--        <dependency>-->
-<!--            <groupId>de.flapdoodle.embed</groupId>-->
-<!--            <artifactId>de.flapdoodle.embed.mongo</artifactId>-->
-<!--            <version>3.0.0</version>-->
-<!--        </dependency>-->
         <!--Spring-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

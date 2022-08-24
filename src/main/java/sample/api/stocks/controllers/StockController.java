@@ -22,6 +22,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
         produces = {APPLICATION_JSON_VALUE})
 @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Successful: Stock(s) found."),
+        @ApiResponse(responseCode = "201", description = "Created: Stock created."),
+        @ApiResponse(responseCode = "202", description = "Accepted: Stock updated."),
+        @ApiResponse(responseCode = "204", description = "Deleted: Not Content."),
         @ApiResponse(responseCode = "400", description = "Bad Request: Check input parameter(s) syntax for invalid characters."),
         @ApiResponse(responseCode = "401", description = "Unauthorized: User is not entitled to retrieve information."),
         @ApiResponse(responseCode = "404", description = "Not Found: Stock(s) not found."),

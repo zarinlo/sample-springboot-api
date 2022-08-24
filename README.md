@@ -7,9 +7,8 @@
 - [Software](#software)
 - [Codebase](#codebase)
 - [Setup and Connect to the Database](#setup-and-connect-to-the-database)
-    * [Option 1 - Run Embedded MongoDB](#option-1---run-embedded-mongodb)
-    * [Option 2 - Setup and Run Local MongoDB](#option-2---setup-and-run-local-mongodb)
-    * [Option 3 - Setup and Connect to Remote MongoDB](#option-3---setup-and-connect-to-remote-mongodb)
+    * [Option 1 - Setup and Run Local MongoDB](#option-2---setup-and-run-local-mongodb)
+    * [Option 2 - Setup and Connect to Remote MongoDB](#option-3---setup-and-connect-to-remote-mongodb)
 - [How the Database Populates](#how-the-database-populates)
 - [Run API via IDE](#run-api-via-ide)
 - [Run API via Command Line](#run-api-via-command-line)
@@ -51,27 +50,12 @@ and automatically generates queries from the method names, in order to simplify 
 
 # Setup and Connect to the Database
 
-### Option 1 - Run Embedded MongoDB
-
-- Uncomment the maven dependency under `<!--Embedded MongoDB-->` in the root `pom.xml`:
-    
-    ```xml
-    <dependency>
-        <groupId>de.flapdoodle.embed</groupId>
-        <artifactId>de.flapdoodle.embed.mongo</artifactId>
-        <version>3.0.0</version>
-    </dependency>
-    ```
-
-- You will see `Jackson Databind` errors, don't worry
-- This will startup an embedded instance of MongoDB, therefore you don't need Options 2 or 3 
-
-### Option 2 - Setup and Run Local MongoDB
+### Option 1 - Setup and Run Local MongoDB
 
 - MacOS Guide: [Install mongodb-community via Homebrew](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x)
 - Windows Guide: [Install mongodb via MSI package](https://www.simplilearn.com/tutorials/mongodb-tutorial/install-mongodb-on-windows)
 
-### Option 3 - Setup and Connect to Remote MongoDB
+### Option 2 - Setup and Connect to Remote MongoDB
 
 - [Read the section on how to setup and connect to MongoDB Atlas](https://faun.pub/setup-a-circleci-pipeline-for-a-containerized-spring-boot-app-93045fa060de)
 

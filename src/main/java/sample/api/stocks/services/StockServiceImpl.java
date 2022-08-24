@@ -94,7 +94,7 @@ public class StockServiceImpl implements StockService {
         if (currentStock != null) {
             currentStock.setLastPrice(lastPrice);
             stockRepository.save(currentStock);
-            return new StockGeneralResponse(symbol, HttpStatus.OK);
+            return new StockGeneralResponse(symbol, HttpStatus.ACCEPTED);
         } else {
             throw new StocksResponseException("The stock you are trying to update does not exist.");
         }
