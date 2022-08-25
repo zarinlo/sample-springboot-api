@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sample.api.stocks.controllers.StockController;
 
 @RestControllerAdvice(assignableTypes = StockController.class)
-public class StocksResponseExceptionHandler {
+public class StockResponseExceptionHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StocksResponseExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockResponseExceptionHandler.class);
 
 }

@@ -25,7 +25,7 @@ This sample project aims to teach you:
 - How to design an API contract (i.e. set HTTP response codes, develop routes, etc)
 - What the following components are responsible for: Controller, Service, Repository 
 - How to utilize a remote MongoDB cluster
-- How to setup Swagger, an Interface Description Language for describing RESTful APIs
+- How to set up Swagger / Open API spec, an Interface Description Language for describing RESTful APIs
 
 # Guides
 
@@ -113,11 +113,10 @@ mvnw.cmd spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=lo
 # Swagger
 
 - Swagger includes automated documentation that allows you to TRY OUT the API endpoints on the browser!
-- Swagger 3.0 is configured under `SwaggerConfig.java`
+- OpenAPI spec 3.0 is configured under `SwaggerConfig.java`
 - Swagger UI: http://localhost:8080/swagger-ui/index.html
 ![swagger](./assets/swagger.png)
-- Swagger API spec 2.0: http://localhost:8080/v2/api-docs
-- Open API spec 3.0.3: http://localhost:8080/v3/api-docs
+- OpenAPI spec 3.0.3: http://localhost:8080/v3/api-docs
 - Stock data: http://localhost:8080/api/v1/stocks
 
 # Spring Actuator Endpoints 

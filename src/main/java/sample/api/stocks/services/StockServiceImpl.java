@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import sample.api.stocks.exceptions.StocksResponseException;
+import sample.api.stocks.exceptions.StockResponseException;
 import sample.api.stocks.models.*;
 import sample.api.stocks.repositories.StockRepository;
 
@@ -39,7 +39,7 @@ public class StockServiceImpl implements StockService {
     //---------------------------------------------------------------------------------------------------------------
 
     @Scheduled(fixedRate = 60000)
-    public void populateStockDatabase() throws StocksResponseException {
+    public void populateStockDatabase() throws StockResponseException {
         String path = "/price";
 
         UriComponentsBuilder builder = UriComponentsBuilder
@@ -52,7 +52,7 @@ public class StockServiceImpl implements StockService {
         if (response.getStatusCode() == HttpStatus.OK) {
             Objects.requireNonNull(response.getBody()).forEach(stockRepository::save);
         } else {
-            throw new StocksResponseException("Error: Issue retrieving stocks.");
+            throw new StockResponseException("Error: Issue retrieving stocks.");
         }
     }
 
@@ -89,14 +89,14 @@ public class StockServiceImpl implements StockService {
 
     //---------------------------------------------------------------------------------------------------------------
 
-    public StockGeneralResponse updateStock(String symbol, Double lastPrice) throws StocksResponseException {
+    public StockGeneralResponse updateStock(String symbol, Double lastPrice) throws StockResponseException {
         Stock currentStock = stockRepository.findBySymbol(symbol.toUpperCase());
         if (currentStock != null) {
             currentStock.setLastPrice(lastPrice);
             stockRepository.save(currentStock);
             return new StockGeneralResponse(symbol, HttpStatus.ACCEPTED);
         } else {
-            throw new StocksResponseException("The stock you are trying to update does not exist.");
+            throw new StockResponseException("The stock you are trying to update does not exist.");
         }
     }
 
